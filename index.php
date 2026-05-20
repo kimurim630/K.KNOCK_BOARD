@@ -1,33 +1,44 @@
 <?php
-include 'db.php';
+include 'config.php';
+
 $sql = "SELECT * FROM posts ORDER BY id DESC";
-$result = mysqli_query($conn,$sql);
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>게시판</title>
-    </head>
-    <body>
-        <h1>게시판</h1>
-        <a href="write.php">글쓰기</a>
-        <hr>
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>게시판</h1>
 
-        <?php
-        -- 게시글 출력
-        while ($row = mysqli_fetch_assoc($result))
-        {
-        ?>
-            <h3><?php echo $row['title'];></h3>
-            <p><?php ehco $row['content'];></p>
-            <small><?php ehco $row['created_at'];></small>
-            <hr>
-        <?php
-        }
-        ?>
-    </body>
+    <a href="write.php">글쓰기</a>
+
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+
+        <?php while($row = $result->fetch_assoc()) { ?>
+        <tr>
+            <td><?= $row['id'] ?></td>
+            <td>
+                <a href="view.php?id=<?= $row['id'] ?>">
+                    <?= htmlspecialchars($row['title']) ?>
+                </a>
+            </td>
+            <td><?= htmlspecialchars($row['writer']) ?></td>
+            <td><?= $row['created_at'] ?></td>
+        </tr>
+        <?php } ?>
+    </table>
+</div>
+</body>
 </html>
-
-
