@@ -1,11 +1,15 @@
-CREATE DATABASE board_db;
+-- DB 생성
+CREATE DATABASE IF NOT EXISTS board
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
-USE board_db;
+-- DB 사용
+USE board;
 
-CREATE TABLE posts (
+-- 게시글 테이블 생성
+CREATE TABLE IF NOT EXISTS posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    writer VARCHAR(100) NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
