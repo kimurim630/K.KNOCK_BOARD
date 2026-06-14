@@ -1,8 +1,20 @@
 <?php
+
+session_start();
+
 include "db.php";
 
-$sql = "SELECT * FROM posts ORDER BY id DESC";
+$sql = "
+SELECT
+    p.*,
+    u.username
+FROM posts p
+JOIN users u 
+ON p.author_id = u.id
+ORDER BY p.id DESC
+";
 $result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +27,35 @@ $result = $conn->query($sql);
 
 <h1>게시판</h1>
 
-<a href="write.php">글쓰기</a>
+<?php if(isset($_SESSION['user_id'])) { ?>
 
-<hr>
+    <div>
+        <a href="logout.php">
+            로그아웃
+        </a><br>
+	<a href="write.php">
+	글쓰기
+	</a>
+
+    </div>
+
+<?php } else { ?>
+
+    <div>
+
+        <a href="login.php">
+            로그인
+        </a>
+
+        |
+
+        <a href="register.php">
+            회원가입
+        </a>
+
+    </div>
+
+<?php } ?>
 
 <table border="1" width="800">
 <tr>
@@ -38,7 +76,7 @@ $result = $conn->query($sql);
         </a>
     </td>
 
-    <td><?= htmlspecialchars($row['writer']) ?></td>
+    <td><?= htmlspecialchars($row['username']) ?></td>
 
     <td><?= $row['created_at'] ?></td>
 </tr>

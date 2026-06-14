@@ -1,25 +1,26 @@
 <?php
 
+session_start();
 include "db.php";
 
 $title = $_POST['title'];
-$writer = $_POST['writer'];
+$author_id = $_SESSION['user_id'];
 $content = $_POST['content'];
 
 $stmt = $conn->prepare(
-"INSERT INTO posts(title,writer,content)
+"INSERT INTO posts(title,author_id,content)
  VALUES(?,?,?)"
 );
 
 $stmt->bind_param(
-"sss",
+"sis",
 $title,
-$writer,
+$author_id,
 $content
 );
 
 $stmt->execute();
 
 header("Location:index.php");
-
+exit;
 ?>

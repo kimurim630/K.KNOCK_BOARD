@@ -34,11 +34,6 @@ $row = $result->fetch_assoc();
 name="id"
 value="<?= $row['id'] ?>">
 
-작성자<br>
-
-<input type="text"
-name="writer"
-value="<?= htmlspecialchars($row['writer']) ?>">
 
 <br><br>
 
@@ -48,8 +43,6 @@ value="<?= htmlspecialchars($row['writer']) ?>">
 name="title"
 size="50"
 value="<?= htmlspecialchars($row['title']) ?>">
-
-<br><br>
 
 내용<br>
 

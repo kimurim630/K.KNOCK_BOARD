@@ -2,8 +2,8 @@
 
 $conn = new mysqli(
     "localhost",
-    "root",
-    "비밀번호",
+    "boarduser",
+    "1234",
     "boarddb"
 );
 
