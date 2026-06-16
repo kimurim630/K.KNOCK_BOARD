@@ -21,6 +21,7 @@ CREATE TABLE posts (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
                       ON UPDATE CURRENT_TIMESTAMP,
+  category VARCHAR(20) NOT NULL DEFAULT 'free',
   FOREIGN KEY (author_id) REFERENCES users(id)
 );
 

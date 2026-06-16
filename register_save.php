@@ -2,6 +2,8 @@
 
 include "db.php";
 
+session_start();
+
 //trim을 이용해서 앞의 공백 제거
 $username = trim($_POST['username']);
 $password = $_POST['password'];
@@ -40,6 +42,13 @@ $password
 $stmt->execute();
 
 
-header("Location:index.php");
+//insert_id 방금 전에 생성된 user_id가져오기
+$id = $stmt->insert_id;
+
+$_SESSION['user_id'] = $id;
+$_SESSION['username'] = $username;
+$catgory = $_GET['category'] ?? 'free';
+
+header("Location:index.php?category=$category");
 exit;
 ?>

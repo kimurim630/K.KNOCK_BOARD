@@ -1,7 +1,8 @@
 <?php
-include "db.php";
 session_start();
+include "db.php";
 
+$category = $_GET['category'];
 //post요청일때만 처리
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -35,10 +36,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
 
-
+	
        // 5. 메인으로 이동
 
-    header("Location: index.php");
+    header("Location: index.php?category=$category");
     exit;
 }
 ?>
