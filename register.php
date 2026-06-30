@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h2>입력 폼</h2>
+<h2>회원가입</h2>
 
 <form action="register_save.php" method="post">
 
